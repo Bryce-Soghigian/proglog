@@ -40,6 +40,12 @@ func (s *httpServer) handleConsume(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err, Error(), http.StatusInternalServerError)
 		return
 	}
+	res := ConsumeResponse{Record: record}
+	err = json.NewEncoder(w).Encode(res)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 
 }
 
